@@ -1,23 +1,13 @@
-// import { useEffect, useState } from "react";
-// import ProductCard from "../components/ProductCard";
-// import { type, getFeaturedProducts } from "../services/products";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function HomePage() {
-  // const [featured, setFeatured] = useState<Product[]>([]);
-
-  // useEffect(() => {
-  //   getFeaturedProducts().then(setFeatured);
-  // }, []);
+export default function LoginPage() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError("");
 
     const res = await fetch("/api/auth/login", {
       method: "POST",
@@ -33,7 +23,6 @@ export default function HomePage() {
 
     if (!res.ok) {
       console.log(data);
-      setError(data.message || "Invalid password. Please try again");
       return;
     }
 
@@ -42,15 +31,7 @@ export default function HomePage() {
   };
 
   return (
-    // <section className="section">
-    //   {featured.map(product => (
-    //     <ProductCard key={product.id} product={product} />
-    //   ))}
-    // </section>
-    <section className="auth-landing">
-      <h1>Welcome</h1>
-      <p>Choose an option to continue.</p>
-
+    <section className="auth-page">
       <form onSubmit={handleSubmit}>
         <input
           type="email"
@@ -66,7 +47,7 @@ export default function HomePage() {
         />
         <button type="submit">Login</button>
       </form>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+
       <p>
         New here? <Link to="/signup">Create an account</Link>
       </p>

@@ -1,10 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import QuantitySelector from "../components/QuantitySelector";
 
 export default function CartPage() {
   const { items, total, updateQuantity, removeFromCart, clearCart } = useCart();
+  const navigate = useNavigate();
 
+  const handleCheckout = () => {
+    navigate("/checkout", { state: { cartItems: items } });
+  };
   if (items.length === 0) {
     return (
       <section className="section empty-state">
@@ -51,7 +55,7 @@ export default function CartPage() {
           <h3>Order Summary</h3>
           <p>Total items: {items.reduce((sum, item) => sum + item.quantity, 0)}</p>
           <p>Total amount: ₹{total}</p>
-          <button className="primary-btn">Checkout</button>
+          <button className="primary-btn" onClick={handleCheckout}>Checkout</button>
         </aside>
       </div>
     </section>
