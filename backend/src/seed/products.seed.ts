@@ -56,9 +56,15 @@ const products = [
   }
 ];
 
-async function seed() {
+async function seedProducts() {
   try {
-    await mongoose.connect(process.env.MONGO_URI as string);
+    const mongoUri = process.env.MONGODB_URI;
+    
+    if (!mongoUri) {
+      throw new Error("MONGO_URI is missing in .env");
+    }
+  
+    await mongoose.connect(mongoUri);
     await Product.deleteMany();
     await Product.insertMany(products);
     console.log("Seed complete");
@@ -69,4 +75,4 @@ async function seed() {
   }
 }
 
-seed();
+export default seedProducts;

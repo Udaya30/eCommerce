@@ -7,8 +7,11 @@ export default function ShopPage() {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
-    getProducts().then(setProducts);
-  }, []);
+  getProducts().then(data => {
+    console.log("products:", data);
+    setProducts(Array.isArray(data) ? data : []);
+  });
+}, []);
 
   const filteredProducts = useMemo(() => {
     if (selectedCategory === "All") return products;

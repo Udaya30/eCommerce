@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 import Merchant from "../models/Payment";
 
 async function seedMerchant() {
-  const mongoUri = process.env.MONGO_URI;
+  const mongoUri = process.env.MONGODB_URI;
 
   if (!mongoUri) {
     throw new Error("MONGO_URI is missing in .env");
@@ -26,7 +26,4 @@ async function seedMerchant() {
   await mongoose.disconnect();
 }
 
-seedMerchant().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+export default seedMerchant;

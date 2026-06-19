@@ -34,7 +34,7 @@ export default function PaymentPage() {
   useEffect(() => {
   const loadMerchant = async () => {
     try {
-      const merchantId = "6a3409f126971dcff462aac1";
+      const merchantId = "6a34f04a583c79f675d48dc0";
       const url = `http://localhost:5000/api/merchants/${merchantId}`;
       console.log("Fetching:", url);
 
