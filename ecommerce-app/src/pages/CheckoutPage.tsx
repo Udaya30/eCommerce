@@ -73,7 +73,7 @@ export default function CheckoutPage() {
     setLoading(true);
 
     try {
-      const res = await fetch("/api/auth/update-location", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/update-location`, {
         method: "POST",
         credentials: "include",
         headers: {
