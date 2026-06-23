@@ -35,7 +35,7 @@ export default function PaymentPage() {
   const loadMerchant = async () => {
     try {
       const merchantId = "6a34f04a583c79f675d48dc0";
-      const url = `http://localhost:5000/api/merchants/${merchantId}`;
+      const url = `${import.meta.env.VITE_API_URL}/api/merchants/${merchantId}`;
       console.log("Fetching:", url);
 
       const res = await fetch(url);
