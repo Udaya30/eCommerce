@@ -28,13 +28,10 @@ router.post("/login", async (req, res) => {
       return res.status(401).json({ message: "Invalid password" });
     }
 
-    const token = jwt.sign({ userId: user._id.toString() }, JWT_SECRET, { expiresIn: "7d" });
-    res.cookie("token", token, {
-      httpOnly: true,
-      sameSite: "lax",
-      secure: false,
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-    });
+    const token = req.cookies.token;
+    if (!token) {
+      return res.status(401).json({ error: "No token provided" });
+    }
 
     return res.status(200).json({
       message: "Login successful",
