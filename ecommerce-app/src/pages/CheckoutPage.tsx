@@ -107,7 +107,7 @@ export default function CheckoutPage() {
     return (
       <section className="section empty-state">
         <h2>Please log in to checkout</h2>
-        <button className="primary-btn" onClick={() => navigate("/login")}>
+        <button className="primary-btn" onClick={() => navigate("/")}>
           Go to Login
         </button>
       </section>

@@ -38,9 +38,9 @@ router.post("/login", async (req, res) => {
       secure: true,
       sameSite: "none",
     });
-    if (!token) {
-      return res.status(401).json({ error: "No token provided" });
-    }
+    // if (!token) {
+    //   return res.status(401).json({ error: "No token provided" });
+    // }
 
     return res.status(200).json({
       message: "Login successful",
