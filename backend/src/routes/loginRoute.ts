@@ -27,8 +27,13 @@ router.post("/login", async (req, res) => {
     if (!isPasswordValid) {
       return res.status(401).json({ message: "Invalid password" });
     }
-
     const token = req.cookies.token;
+    
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    });
     if (!token) {
       return res.status(401).json({ error: "No token provided" });
     }
