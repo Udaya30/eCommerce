@@ -29,7 +29,7 @@ export default function CheckoutPage() {
           if (res.status === 401) {
             setError("User not logged in");
             setIsCheckingUser(false);
-            redirectTimer = window.setTimeout(() => navigate("/login"), 1000);
+            redirectTimer = window.setTimeout(() => navigate("/"), 1000);
             return;
           }
           setError(data.message || "Failed to fetch user data");
