@@ -42,26 +42,27 @@
 // };
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
+import User from "../models/User";
 
 export interface AuthRequest extends Request {
   user?: any;
 }
 
-export const authMiddleware = (req: AuthRequest, res: Response, next: NextFunction) => {
-  console.log("cookies:", req.cookies);
-  console.log("headers.cookie:", req.headers.cookie);
-
-  const token = req.cookies?.token;
-  console.log("token:", token);
-
-  if (!token) {
-    return res.status(401).json({ message: "No token provided" });
-  }
-
+export const authMiddleware = async (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || "secret");
-    console.log("decoded:", decoded);
-    req.user = decoded;
+    const token = req.cookies?.token;
+    if (!token) {
+      return res.status(401).json({ message: "No token provided" });
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || "secret") as any;
+
+    const user = await User.findById(decoded.id);
+    if (!user) {
+      return res.status(401).json({ message: "User not found" });
+    }
+
+    req.user = user;
     next();
   } catch (err: any) {
     console.error("JWT verify failed:", err.message);
