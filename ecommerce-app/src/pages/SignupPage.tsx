@@ -32,30 +32,35 @@ export default function SignupPage() {
   };
 
   return (
-    <section className="auth-page">
-      <form onSubmit={handleSubmit}>
+    <section className="auth-landing">
+        <h1 className="auth-landing-title">Sign Up</h1>
+        <p className="auth-landing-subTitle">Create your account</p>
+      <form className="auth-landing-form" onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Name"
+          className="auth-landing-input"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
         <input
           type="email"
           placeholder="Email"
+          className="auth-landing-input"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
           type="password"
           placeholder="Password"
+          className="auth-landing-input"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Sign up</button>
+        <button type="submit" className="auth-landing-button">Sign up</button>
       </form>
-      <p>
-        Already have an account? <Link to="/login">Login</Link>
+      <p className="auth-landing-subTitle">
+        Already have an account? <Link to="/">Login</Link>
       </p>
     </section>
   );

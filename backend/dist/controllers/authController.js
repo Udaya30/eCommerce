@@ -60,21 +60,24 @@ const updateLocation = async (req, res) => {
     try {
         const { location } = req.body;
         if (!location) {
-            res.status(400).json({ message: 'Location is required' });
+            res.status(400).json({ message: "Location is required" });
             return;
         }
         const user = req.user;
         if (!user) {
-            res.status(401).json({ message: 'Unauthorized' });
+            res.status(401).json({ message: "Unauthorized" });
             return;
         }
         user.location = location;
         await user.save();
-        res.json({ message: 'Location updated successfully', user: { id: user._id, email: user.email, location: user.location } });
+        res.json({
+            message: "Location updated successfully",
+            user: { id: user._id, email: user.email, location: user.location },
+        });
     }
     catch (error) {
-        console.error('Update location error:', error);
-        res.status(500).json({ message: 'Failed to update location' });
+        console.error("Update location error:", error);
+        res.status(500).json({ message: "Failed to update location" });
     }
 };
 exports.updateLocation = updateLocation;

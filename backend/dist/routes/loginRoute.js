@@ -27,13 +27,15 @@ router.post("/login", async (req, res) => {
         if (!isPasswordValid) {
             return res.status(401).json({ message: "Invalid password" });
         }
-        const token = jsonwebtoken_1.default.sign({ userId: user._id.toString() }, JWT_SECRET, { expiresIn: "7d" });
+        const token = jsonwebtoken_1.default.sign({ id: user._id, email: user.email }, JWT_SECRET, { expiresIn: "7d" });
         res.cookie("token", token, {
             httpOnly: true,
-            sameSite: "lax",
-            secure: false,
-            maxAge: 7 * 24 * 60 * 60 * 1000,
+            secure: true,
+            sameSite: "none",
         });
+        // if (!token) {
+        //   return res.status(401).json({ error: "No token provided" });
+        // }
         return res.status(200).json({
             message: "Login successful",
             user: { id: user._id, name: user.name, email: user.email },
