@@ -48,26 +48,26 @@ export default function HomePage() {
     //   ))}
     // </section>
     <section className="auth-landing">
-      <h1>Welcome</h1>
-      <p>Choose an option to continue.</p>
-
-      <form onSubmit={handleSubmit}>
-        <input
+      <h1 className="auth-landing-title">Welcome</h1>
+      <p className="auth-landing-subTitle">Choose an option to continue.</p>
+ 
+      <form className="auth-landing-form" onSubmit={handleSubmit}>
+        <input className="auth-landing-input"
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <input
+        <input className="auth-landing-input"
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Login</button>
+        <button className="auth-landing-button" type="submit">Login</button>
       </form>
       {error && <p style={{ color: "red" }}>{error}</p>}
-      <p>
+      <p className="auth-landing-subTitle">
         New here? <Link to="/signup">Create an account</Link>
       </p>
     </section>

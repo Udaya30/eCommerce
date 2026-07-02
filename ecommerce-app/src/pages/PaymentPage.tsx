@@ -75,11 +75,15 @@ export default function PaymentPage() {
     `&tn=${encodeURIComponent(state?.order?.id || `ORD-${Date.now()}`)}`;
 
   return (
-    <div>
-      <h1>Payment Page</h1>
-      <p>Merchant: {merchant.businessName}</p>
-      <p>Amount: ₹{amount.toFixed(2)}</p>
-      <QRCode value={upiLink} />
+    <div className="payment-page">
+        <h1 className="payment-page-title">Payment Page</h1>
+        <p className="payment-page-subTitle">Merchant: {merchant.businessName}</p>
+      <div className="payment-card">
+        <p className="payment-amount">Amount: ₹{amount.toFixed(2)}</p>
+        <div className="qr-wrapper">
+          <QRCode value={upiLink} />
+        </div>
+      </div>
     </div>
   );
 }
